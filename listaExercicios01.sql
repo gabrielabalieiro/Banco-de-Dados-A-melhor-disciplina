@@ -84,3 +84,10 @@ left join livros on autores.id = livros.autor_id
 group by autores.nome
 order by  numero_de_livros desc
 limit 1;
+
+/* Exercicio 17 */
+select produto, SUM(receita) as receita_total
+from vendas
+group by produto
+order by receita_total asc
+limit 1;
