@@ -76,3 +76,11 @@ right join alunos on matriculas.aluno_id = alunos.id;
 select alunos.nome as aluno, matriculas.curso
 from alunos
 inner join matriculas on alunos.id = matriculas.aluno_id;
+
+/* Exercicio 16 */
+select autores.nome as autor, COUNT(livros.id) as numero_de_livros
+from autores
+left join livros on autores.id = livros.autor_id
+group by autores.nome
+order by  numero_de_livros desc
+limit 1;
