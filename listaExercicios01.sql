@@ -91,3 +91,10 @@ from vendas
 group by produto
 order by receita_total asc
 limit 1;
+
+/* Exercicio 18 */
+select autores.nome as autor, COUNT(livros.id) as numero_de_livros,
+ COUNT(livros.id) * 20 as receita_total
+from autores
+left join livros on autores.id = livros.autor_id
+group by autores.nome;
