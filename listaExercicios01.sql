@@ -51,3 +51,8 @@ from autores
 left join livros on autores.id = livros.autor_id
 group by autores.nome
 having COUNT(livros.id) > 2;
+
+/* Exercicio 11 */
+select livros.titulo as livro, autores.nome as autor
+from livros
+inner join autores on livros.autor_id = autores.id;
