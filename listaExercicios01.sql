@@ -33,3 +33,8 @@ group by autores.nome;
 select curso, COUNT(aluno_id) as total_alunos
 from matriculas
 group by curso;
+
+/* Exercicio 8 */ 
+select produto, AVG(receita) as receita_media
+from vendas
+group by produto;
