@@ -67,3 +67,16 @@ end //
 DELIMITER ;
 
 call sp_LivrosAteAno(2005);
+
+/* Exercicio 6 */ 
+DELIMITER //
+create procedure sp_TitulosPorCategoria(in categoriaNome VARCHAR(100))
+begin
+    select Livro.Titulo
+    from Livro
+    inner join Categoria on Livro.Categoria_ID = Categoria.Categoria_ID
+    where Categoria.Nome = categoriaNome;
+end //
+DELIMITER ;
+
+call sp_TitulosPorCategoria('Romance');
