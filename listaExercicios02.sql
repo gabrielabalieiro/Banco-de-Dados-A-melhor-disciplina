@@ -98,3 +98,20 @@ end //
 DELIMITER ;
 
 call sp_AdicionarLivro('Novo Livro', 1, 2023, 250, 1);
+
+/* Exercicio 8 */
+DELIMITER //
+create procedure sp_AutorMaisAntigo(out nomeAutorMaisAntigo VARCHAR(255))
+begin
+    select CONCAT(Nome, ' ', Sobrenome)
+    into nomeAutorMaisAntigo
+    from Autor
+    where Data_Nascimento = (
+        select MIN(Data_Nascimento)
+        from Autor
+    );
+end //
+DELIMITER ;
+
+call sp_AutorMaisAntigo(@nomeAutorMaisAntigo);
+select @nomeAutorMaisAntigo;
