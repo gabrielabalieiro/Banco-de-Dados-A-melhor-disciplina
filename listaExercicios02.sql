@@ -24,3 +24,16 @@ DELIMITER ;
 call sp_LivrosPorCategoria('Ciência');
 call sp_LivrosPorCategoria('Autoajuda');
 
+/* Exercicio 3 */ 
+DELIMITER //
+create procedure sp_ContarLivrosPorCategoria(in categoriaNome VARCHAR(100), out totalLivros INT)
+begin
+    select count(*) into totalLivros
+    from Livro
+    inner join Categoria on Livro.Categoria_ID = Categoria.Categoria_ID
+    where Categoria.Nome = categoriaNome;
+end //
+DELIMITER ;
+
+call sp_ContarLivrosPorCategoria('Romance', @total);
+select @total;
