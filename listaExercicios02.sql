@@ -130,3 +130,16 @@ end //
 DELIMITER ;
 
 call sp_LivrosPorCategoria('Romance');
+
+/* Exercicio 10 */
+DELIMITER //
+create procedure sp_LivrosESeusAutores()
+begin
+    select Livro.Titulo, Autor.Nome, Autor.Sobrenome
+    from Livro
+    inner join Autor_Livro on Livro.Livro_ID = Autor_Livro.Livro_ID
+    inner join Autor on Autor_Livro.Autor_ID = Autor.Autor_ID;
+end //
+DELIMITER ;
+
+call sp_LivrosESeusAutores();
