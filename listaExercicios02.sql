@@ -80,3 +80,21 @@ end //
 DELIMITER ;
 
 call sp_TitulosPorCategoria('Romance');
+
+/* Exercicio 7 */ 
+DELIMITER //
+create procedure sp_AdicionarLivro(
+    in tituloLivro VARCHAR(255),
+    in editoraID INT,
+    in anoPublicacao INT,
+    in numPaginas INT,
+    in categoriaID INT
+)
+begin
+    insert IGNORE into Livro (Titulo, Editora_ID, Ano_Publicacao, Numero_Paginas, Categoria_ID)
+    values (tituloLivro, editoraID, anoPublicacao, numPaginas, categoriaID);
+    
+end //
+DELIMITER ;
+
+call sp_AdicionarLivro('Novo Livro', 1, 2023, 250, 1);
