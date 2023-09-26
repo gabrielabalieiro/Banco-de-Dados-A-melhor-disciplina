@@ -37,3 +37,19 @@ DELIMITER ;
 
 call sp_ContarLivrosPorCategoria('Romance', @total);
 select @total;
+
+/* Exercicio 4 */
+DELIMITER //
+create procedure sp_VerificarLivrosCategoria(in categoriaNome VARCHAR(100), out possuiLivros BOOLEAN)
+begin
+    set possuiLivros = exists (
+        select 1
+        from Livro
+        inner join Categoria on Livro.Categoria_ID = Categoria.Categoria_ID
+        where Categoria.Nome = categoriaNome
+    );
+end //
+DELIMITER ;
+
+call sp_VerificarLivrosCategoria('Romance', @possuiLivros);
+select @possuiLivros;
