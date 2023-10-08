@@ -83,3 +83,15 @@ DELIMITER ;
 
 select produto, preco, quantidade, TOTAL_VALOR(preco, quantidade) as valor_total
 from produtos;
+
+/* Funções de Agregação */ 
+select count(*) as total_de_produtos from produtos;
+
+select produto, preco from produtos
+where preco = (select MAX(preco) from produtos);
+
+select produto, preco from produtos
+where preco = (select MIN(preco) from produtos);
+
+select SUM(if(quantidade > 0, preco * quantidade, 0)) as total_em_estoque
+from produtos;
