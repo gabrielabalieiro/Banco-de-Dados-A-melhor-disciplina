@@ -95,3 +95,58 @@ where preco = (select MIN(preco) from produtos);
 
 select SUM(if(quantidade > 0, preco * quantidade, 0)) as total_em_estoque
 from produtos;
+
+/* Criando funções */ 
+DELIMITER //
+create function FATORIAL(n INT)
+returns INT
+begin
+    if n <= 1 then
+        return 1;
+    else
+        return n * FATORIAL(n - 1);
+    end if;
+end;
+//
+DELIMITER ;
+
+DELIMITER //
+create function F_EXPONENCIAL(base INT, expoente INT)
+returns INT
+begin
+    declare resultado INT;
+    set resultado = 1;
+    while expoente > 0 do
+        set resultado = resultado * base;
+        set expoente = expoente - 1;
+    end while;
+    return resultado;
+end;
+//
+DELIMITER ;
+
+DELIMITER //
+create function E_PALINDROMO(palavra VARCHAR(50))
+returns INT
+begin
+    declare tamanho INT;
+    declare i INT;
+    declare reversa VARCHAR(50);
+    
+    set tamanho = LENGTH(palavra);
+    set i = tamanho;
+    set reversa = '';
+    
+    while i > 0 do
+        set reversa = CONCAT(reversa, SUBSTRING(palavra, i, 1));
+        set i = i - 1;
+    end while;
+    
+    if palavra = reversa then
+        return 1;
+    else
+        return 0;
+    end if;
+end;
+//
+DELIMITER ;
