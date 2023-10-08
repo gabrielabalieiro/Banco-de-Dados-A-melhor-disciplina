@@ -69,3 +69,17 @@ select produto,
         else 'Caro'
     end as categoria_preco
 from produtos;
+
+/* Função Personalizada */ 
+DELIMITER //
+create function TOTAL_VALOR(preco DECIMAL(10, 2), quantidade INT)
+returns DECIMAL(10, 2)
+begin
+    declare valor_total DECIMAL(10, 2);
+    set valor_total = preco * quantidade;
+    return valor_total;
+end //
+DELIMITER ;
+
+select produto, preco, quantidade, TOTAL_VALOR(preco, quantidade) as valor_total
+from produtos;
