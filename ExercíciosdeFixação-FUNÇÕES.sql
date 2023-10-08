@@ -53,3 +53,19 @@ insert into eventos (data_evento) values (NOW());
 select DATEDIFF(NOW(), (select MIN(data_evento) from eventos)) as dias_diff;
 
 select data_evento, DAYNAME(data_evento) as nome_dia_semana from eventos;
+
+/* Funções de Controle de Fluxo */
+select produto,
+    case
+        when quantidade > 0 then 'Em estoque'
+        else 'Fora de estoque'
+    end as status
+from produtos;
+
+select produto,
+    case
+        when preco < 50 then 'Barato'
+        when preco >= 50 and preco <= 100 then 'Médio'
+        else 'Caro'
+    end as categoria_preco
+from produtos;
