@@ -38,3 +38,18 @@ select produto, ABS(quantidade) as quantidade_absoluta from produtos;
 
 select AVG(preco) as media_preco from produtos;
 
+/* Funções de Data */
+create table eventos (
+    data_evento DATE
+);
+insert into eventos (data_evento)
+values ('2023-10-08'),
+       ('2023-10-15'),
+       ('2023-10-22'),
+       ('2023-11-05');
+
+insert into eventos (data_evento) values (NOW());
+
+select DATEDIFF(NOW(), (select MIN(data_evento) from eventos)) as dias_diff;
+
+select data_evento, DAYNAME(data_evento) as nome_dia_semana from eventos;
