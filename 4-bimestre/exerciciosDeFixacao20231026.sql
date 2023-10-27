@@ -19,17 +19,22 @@ FOR EACH ROW
 CREATE TRIGGER atualiza_nome_cliente_auditoria
 BEFORE UPDATE ON Clientes
 FOR EACH ROW
+delimiter //
     IF NEW.nome = NULL OR NEW.nome='' THEN
 		INSERT INTO Auditoria(mensagem, data_hora)
         values ('Há uma tentiva de atulização de cliente para nulo');
-	END IF;
-/*PROFESSOR  NÃO SEI OQUE ESTÁ DANDO ERRO DE SINTAXE E NÃO SEI COMO ARRUMAR PROCUREI EN TODOS OS LUGARES E ELES TEM A MESMA SOLUÇÃO Q ESTÁ AI*/
+
+	END IF //
+delimiter ;
+/*PROFESSOR  NÃO SEI OQUE ESTÁ DANDO ERRO DE SINTAXE  no (if)E NÃO SEI COMO ARRUMAR PROCUREI EN TODOS OS LUGARES E ELES TEM A MESMA SOLUÇÃO Q ESTÁ AI*/
 
 CREATE TRIGGER novo_pedido_auditoria_estoque
 AFTER INSERT ON Pedidos
 FOR EACH ROW
     UPDATE Produtos SET estoque = estoque - NEW.quantidade WHERE id = NEW.produto_id;
+delimiter //
     IF (SELECT estoque FROM Produtos WHERE id = NEW.produto_id) < 5 THEN
         INSERT INTO Auditoria (mensagem)
         VALUES ('Estoque baixo para o produto com ID ' + NEW.produto_id);
-    END IF;
+    END IF //
+    delimiter ;
